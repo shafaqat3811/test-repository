@@ -1,0 +1,45 @@
+<template>
+    <div class="container slds-p-around_medium backcolor">
+        <div class="slds-text-heading_large slds-text-align_center">Your Ultimate Destination for Finding Birth Year Holidays</div>
+        <div class="slds-text-heading-small slds-text-align_center">A realm where tracking holidays for your Birth Year is made effortless</div>
+
+        <div class="slds-m-top_medium">
+            <lightning-input
+                label="Enter the National Id Number" 
+                type="text"
+                value={nationalId}
+                onchange={handleKeyUp}>
+            </lightning-input>
+        </div>
+
+        <template if:true={error}>
+            <p class="slds-text-color_error slds-m-top_medium">Please enter a valid Id.</p>
+        </template>
+
+        <div class="slds-m-top_medium">
+            <lightning-button
+                label="Search"
+                variant="brand"
+                onclick={handleClick}
+                disabled={isDisabled}>
+            </lightning-button>
+        </div>
+
+        <template if:true={loadHolidays}>
+            <br>
+            <p>Here is the list of Public Holidays, holidays with Primary Type other than "Public Holiday" have been excluded.</p>
+            <br>
+
+            <lightning-datatable
+                data={holidays}
+                columns={columns}
+                key-field="id"
+                show-row-number-column
+                hide-checkbox-column
+                class="slds-m-top_medium"
+                wrap-text-max-lines="2"
+            ></lightning-datatable>
+        </template>
+
+    </div>
+</template>
